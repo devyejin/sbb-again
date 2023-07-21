@@ -1,0 +1,64 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.mysite'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor //컴파일 시점으로 코드를 생성
+	}
+
+	all {
+		exclude  group: "org.springframework.boot", module : "spring-boot-starter-logging"
+	}
+
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.projectlombok:lombok:1.18.26'
+	testImplementation 'org.projectlombok:lombok:1.18.26'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testImplementation 'org.projectlombok:lombok:1.18.22'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+	runtimeOnly 'com.h2database:h2' //런타임시에만사용
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //implementation : 해당 라이브러리와 관련된 모듈만 컴파일 -> rebuild속도가 빠름
+//	implementation 'org.hibernate:hibernate-entitymanager:4.3.10.Final'
+
+//	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+
+	//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//	testImplementation 'org.springframework.security:spring-security-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
